@@ -1,0 +1,41 @@
+﻿
+using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Monopoly;
+
+namespace MonopolyTests
+{
+    [TestClass]
+    public class UnitTest1
+    {
+		[TestMethod]
+		public void InitializeGame()
+		{
+			Game game = new Game();
+			Assert.Equals("Go", game.Board.Squares[0].Name);
+		}
+		[TestMethod]
+        public void AddPlayer()
+        {
+			Game game = new Game();
+			game.AddPlayer("Battleship");
+			Assert.Equals("Battleship", game.Players[0].Name);
+        }
+		[TestMethod]
+		public void DoTwentyRounds()
+		{
+			Game game = new Game();
+			game.AddPlayer("Battleship");
+			game.AddPlayer("Shoe");
+			game.AddPlayer("Dog");
+			game.AddPlayer("Tophat");
+			for (int i = 0; i < 20; i++)
+			{
+				for (int x = 0; x < game.Players.Count; x++)
+				{
+					game.TakeTurn(game.Players[x]);
+				}
+			}
+		}
+    }
+}

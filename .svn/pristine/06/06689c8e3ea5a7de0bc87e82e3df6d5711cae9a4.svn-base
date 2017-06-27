@@ -1,0 +1,13 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Monopoly
+{
+    public class Player
+    {
+		public String Name { get; set; }
+		public int Position { get; set; }
+		public int JailTurn { get; set; }
+    }
+}

@@ -1,0 +1,71 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Monopoly
+{
+	public class Board
+	{
+		public List<Square> Squares;
+		public Board()
+		{
+			Squares = new List<Square>();//Maybe read a file or something for all this jazz.
+			Squares.Add(new Square("Go"));
+			Squares.Add(new Square("Mediterannean Place"));
+			Squares.Add(new Square("Community Chest"));
+			Squares.Add(new Square("Baltic Avenue"));
+			Squares.Add(new Square("Income Tax"));
+			Squares.Add(new Square("Reading Railroad"));
+			Squares.Add(new Square("Oriental Avenue"));
+			Squares.Add(new Square("Chance"));
+			Squares.Add(new Square("Vermont Avenue"));
+			Squares.Add(new Square("Connecticut Avenue"));
+			Squares.Add(new Square("Visiting"));
+			Squares.Add(new Square("Just"));
+			Squares.Add(new Square("St. Charles Place"));
+			Squares.Add(new Square("Electric Company"));
+			Squares.Add(new Square("States Avenue"));
+			Squares.Add(new Square("Vermont Avenue"));
+			Squares.Add(new Square("Pennsylvania Railroad"));
+
+			Squares.Add(new Square("St. James Place"));
+			Squares.Add(new Square("Community Chest"));
+			Squares.Add(new Square("Tennessee Avenue"));
+			Squares.Add(new Square("New York Avenue"));
+			Squares.Add(new Square("Free Parking"));
+
+			Squares.Add(new Square("Kentucky Avenue"));
+			Squares.Add(new Square("Chance"));
+			Squares.Add(new Square("Indiana Avenue"));
+			Squares.Add(new Square("Illinois Avenue"));
+			Squares.Add(new Square("B&O Railroad"));
+			Squares.Add(new Square("Atlantic Avenue"));
+			Squares.Add(new Square("Ventnor Avenue"));
+			Squares.Add(new Square("Water Works"));
+			Squares.Add(new Square("Marvin Gardens"));
+			Squares.Add(new Square("Go To Jail"));
+
+			Squares.Add(new Square("Pacific Avenue"));
+			Squares.Add(new Square("North Carolina Avenue"));
+			Squares.Add(new Square("Community Chest"));
+			Squares.Add(new Square("Pennsylvania Avenue"));
+			Squares.Add(new Square("Short Line"));
+			Squares.Add(new Square("Chance"));
+			Squares.Add(new Square("Park Place"));
+			Squares.Add(new Square("Luxury Tax"));
+			Squares.Add(new Square("Boardwalk"));
+		}
+
+		public Square FindSquareByName(String name)
+		{
+			foreach (Square square in Squares)
+			{
+				if (square.Name.Equals(name))
+				{
+					return square;
+				}
+			}
+			return null;
+		}
+	}
+}

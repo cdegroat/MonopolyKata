@@ -1,0 +1,90 @@
+﻿using System;
+using System.Collections.Generic;
+using static Monopoly.GameDice;
+
+namespace Monopoly
+{
+	public class Game
+	{
+		public Board Board { get; set; }
+		public List<Player> Players { get; set; }
+
+		public Game()
+		{
+			Board = new Board();
+			Players = new List<Player>();
+		}
+
+		public void AddPlayer(String name)
+		{
+			Player newPlayer = new Player();
+			newPlayer.Name = name;
+			Players.Add(newPlayer);
+		}
+
+		public void TakeTurn(Player player)
+		{
+			DiceResult firstDiceResult = GameDice.MakeRoll();
+			if (player.JailTurn >= 1)
+			{
+				if (firstDiceResult.Doubles) {
+					player.JailTurn = 0;
+				}
+				player.JailTurn++;
+				if (player.JailTurn > 3)
+				{
+					RemovePlayerFromJail(player);
+					return;
+				}
+			}
+			MovePlayer(player, firstDiceResult.Result);
+			ResolvePlayerLandOnSpace(player);
+			if (firstDiceResult.Doubles)
+			{
+				DiceResult secondDiceResult = GameDice.MakeRoll();
+				MovePlayer(player, secondDiceResult.Result);
+				ResolvePlayerLandOnSpace(player);
+				if (secondDiceResult.Doubles)
+				{
+					DiceResult thirdDiceResult = GameDice.MakeRoll();
+					if (thirdDiceResult.Doubles)
+					{
+						PlacePlayerInJail(player);
+					}
+					else
+					{
+						MovePlayer(player, thirdDiceResult.Result);
+						ResolvePlayerLandOnSpace(player);
+					}
+				}
+			}
+		}
+
+		public void PlacePlayerInJail(Player player)
+		{
+			player.JailTurn = 1;
+		}
+
+		public void RemovePlayerFromJail(Player player)
+		{
+			player.JailTurn = 0;
+			player.Position = Board.Squares.IndexOf(Board.FindSquareByName("Visiting"));
+		}
+
+		public void ResolvePlayerLandOnSpace(Player player)
+		{
+
+		}
+
+
+		public void MovePlayer(Player player,int spaces) {
+			player.Position += spaces;
+			if (Board.Squares.Count < player.Position)
+			{
+				player.Position = player.Position - Board.Squares.Count;
+			}
+		}
+
+		
+    }
+}
